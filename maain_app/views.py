@@ -1,8 +1,9 @@
 from itertools import count
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from maain_app.models import Customer
+from maain_app.my_forms import CustomerForm
 
 
 # Create your views here.
@@ -19,3 +20,33 @@ def home(request):
         count = Customer.objects.all().count()
         print(f"{count} Customers")
     return render(request, 'home.html')
+
+
+def show(request):
+    data = Customer.objects.all() # select * from customers
+    return render(request, 'show.html', {'data': data})
+
+
+def delete(request, id):
+    user = Customer.objects.get(id=id)
+    user.delete()
+    return redirect('show-page')
+
+
+def details(request, id):
+    user = Customer.objects.get(id=id)
+    return render(request, 'details.html', {'user': user})
+
+
+def add(request):
+    if request.method == "POST":
+        pass
+    else:
+        form = CustomerForm()
+    return render(request, 'forms.html', {'form': form})
+
+
+
+
+
+
