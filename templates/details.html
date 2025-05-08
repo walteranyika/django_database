@@ -10,6 +10,10 @@
                  <p>Gender is: {{ user.gender | capfirst }}</p>
                  <p>Weight is : {{ user.weight }} kg</p>
                  <p>Height is: {{ user.height }} cm</p>
+                 {% if user.pic %}
+                 	<img width="100%" src="{{ user.pic.url }}" alt="">
+                 {% endif %}
+
              </div>
         </div>
     </div>
